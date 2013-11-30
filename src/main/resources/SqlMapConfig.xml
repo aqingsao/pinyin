@@ -6,7 +6,7 @@
 <configuration>
 
     <typeAliases>
-        <typeAlias alias="Contact" type="com.loiane.model.Contact"/>
+        <typeAlias alias="Contact" type="com.pinyin.domain.Contact"/>
     </typeAliases>
 
     <environments default="development">
@@ -22,7 +22,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/loiane/data/Contact.xml"/>
+        <mapper resource="sqlmap/contact.xml"/>
     </mappers>
 
 </configuration>

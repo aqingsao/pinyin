@@ -33,6 +33,6 @@ public class PinyinServiceMockTest {
         pinyinService.updatePinyin("朝", "chao");
 
         verify(pinyinDAO, times(1)).updatePinyin("朝", "chao");
-        verify(emailService, times(1)).sendEmail("admin@host.com", "title", "body");
+        verify(emailService, times(1)).sendEmail(null);
     }
 }

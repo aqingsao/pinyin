@@ -17,13 +17,13 @@ public class EmailUtilsTheoryTest {
     public static TestData[] ARRAYS = new TestData[]{aData("a@b.com", true), aData("a@b.", false)};
 
     @Theory
-    public void should_return_true_when_given_a_at_b_dot_com_dot_cn(TestData testData){
-         assertThat(EmailUtils.isValid(testData.getEmail()), is(testData.getExpected()));
+    public void should_check_whether_email_is_valid(TestData testData){
+         assertThat(EmailUtils.isValid(testData.email), is(testData.expected));
     }
 
     static class TestData {
-        private String email;
-        private boolean expected;
+        public String email;
+        public boolean expected;
         static TestData aData(String email, boolean expected) {
             return new TestData(email, expected);
         }
@@ -32,14 +32,6 @@ public class EmailUtilsTheoryTest {
         public TestData(String email, boolean expected) {
             this.email = email;
             this.expected = expected;
-        }
-
-        private String getEmail() {
-            return email;
-        }
-
-        private boolean getExpected() {
-            return expected;
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.pinyin.service;
 
+import com.pinyin.domain.Email;
+
 public class EmailService {
-    public void sendEmail(String recipientAddress, String title, String body) {
-        //To change body of created methods use File | Settings | File Templates.
+    public void sendEmail(Email email) {
     }
 }

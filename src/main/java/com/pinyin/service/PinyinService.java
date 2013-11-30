@@ -1,6 +1,8 @@
 package com.pinyin.service;
 
 import com.pinyin.dao.PinyinDAO;
+import com.pinyin.domain.Address;
+import com.pinyin.domain.Email;
 
 public class PinyinService {
     private PinyinDAO pinyinDAO = new PinyinDAO();
@@ -53,6 +55,24 @@ public class PinyinService {
 
     public void updatePinyin(String chineseWord, String pinyin) {
         this.pinyinDAO.updatePinyin(chineseWord, pinyin);
-        this.emailService.sendEmail("admin@host.com", "title", "body");
+
+        Address from = new Address();
+        from.setUserName("doNotReply");
+        from.setUserAddress("doNotReply@host.com");
+        Address to = new Address();
+        to.setUserName("admin");
+        to.setUserAddress("admin@host.com");
+
+        Email email = new Email();
+        email.setFrom(from);
+        email.setTo(to);
+        email.setSubject("subject");
+        email.setMessage("message");
+//
+//        Address from = Address.anAddress("doNotReply", "doNotReply@host.com");
+//        Address to = Address.anAddress("admin", "admin@host.com");
+//        Email email2 = Email.anEmail(from, "subject", "message", to);
+
+        this.emailService.sendEmail(email);
     }
 }

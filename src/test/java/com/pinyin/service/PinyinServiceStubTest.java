@@ -4,6 +4,9 @@ import com.pinyin.dao.PinyinDAO;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -54,5 +57,10 @@ public class PinyinServiceStubTest {
     public void should_return_WQuestoinMark_when_given_武瞾() {
         String actual = pinyinService.getPinyinHeader("武瞾");
         assertThat(actual, is("W?"));
+    }
+
+    public static void main(String[] args) throws UnknownHostException {
+        InetAddress localHost = InetAddress.getLocalHost();
+        System.out.println(localHost);
     }
 }

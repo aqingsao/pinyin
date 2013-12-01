@@ -1,11 +1,11 @@
-package com.pinyin.dojo;
+package com.pinyin.utils;
 
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
-import static com.pinyin.dojo.EmailUtilsTheoryTest.TestData.aData;
+import static com.pinyin.utils.EmailUtilsTheoryTest.TestData.aData;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;

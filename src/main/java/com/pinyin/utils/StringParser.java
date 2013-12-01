@@ -1,4 +1,4 @@
-package com.pinyin.dojo;
+package com.pinyin.utils;
 
 public class StringParser {
     public int parseAndSum(String string) {

@@ -1,4 +1,4 @@
-package com.pinyin.dojo;
+package com.pinyin.utils;
 
 import org.junit.Test;
 

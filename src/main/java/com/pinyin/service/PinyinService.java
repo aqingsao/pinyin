@@ -1,11 +1,10 @@
 package com.pinyin.service;
 
+import com.pinyin.dao.MyBatisConnectionFactory;
 import com.pinyin.dao.PinyinDAO;
 import com.pinyin.domain.Address;
 import com.pinyin.domain.Email;
-import org.mockito.Mock;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 public class PinyinService {
@@ -13,7 +12,7 @@ public class PinyinService {
     private EmailService emailService;
 
     public PinyinService() {
-        this(new PinyinDAO(), new EmailService());
+        this(new PinyinDAO(MyBatisConnectionFactory.getSqlSessionFactory()));
     }
 
     public PinyinService(PinyinDAO pinyinDAO) {

@@ -1,5 +1,6 @@
 package com.pinyin.service;
 
+import com.pinyin.dao.MyBatisConnectionFactory;
 import com.pinyin.dao.PinyinDAO;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,7 @@ public class PinyinServiceFakeTest {
         private Properties properties;
 
         public FakePinyinDAO() {
+            super(MyBatisConnectionFactory.getSqlSessionFactory());
             properties = new Properties();
             properties.setProperty("章", "zhang");
             properties.setProperty("子", "zi");

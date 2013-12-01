@@ -10,12 +10,11 @@ public class ContactDAO {
 
     private SqlSessionFactory sqlSessionFactory;
 
-    public ContactDAO(){
-        sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
+    public ContactDAO(SqlSessionFactory sqlSessionFactory){
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     public List<Contact> selectAll(){
-
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
@@ -26,7 +25,6 @@ public class ContactDAO {
     }
 
     public Contact selectById(int id){
-
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
@@ -36,12 +34,7 @@ public class ContactDAO {
         }
     }
 
-    /**
-     * Updates an instance of Contact in the database.
-     * @param contact the instance to be updated.
-     */
     public void update(Contact contact){
-
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
@@ -53,7 +46,6 @@ public class ContactDAO {
     }
 
     public void insert(Contact contact){
-
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
@@ -65,7 +57,6 @@ public class ContactDAO {
     }
 
     public void delete(int id){
-
         SqlSession session = sqlSessionFactory.openSession();
 
         try {

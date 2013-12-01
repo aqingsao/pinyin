@@ -2,7 +2,6 @@ package com.pinyin.dao;
 
 import com.pinyin.commons.DAOTestRunner;
 import com.pinyin.domain.Contact;
-import org.hamcrest.core.Is;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +23,8 @@ public class ContactDAOTest {
 
     @BeforeClass
     public static void runBeforeClass() {
-        contactDAO = new ContactDAO();
+        contactDAO = new ContactDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+
         zhangSan = persistedContact("ZhangSan", "(010) 6688 5544", "zhangsan@host.com");
         liSi = persistedContact("LiSi", "(010) 6688 5533", "lisi@host.com");
     }
@@ -93,5 +93,4 @@ public class ContactDAOTest {
         contactDAO.insert(contact);
         return contact;
     }
-
 }

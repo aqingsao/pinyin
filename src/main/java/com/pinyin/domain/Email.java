@@ -40,54 +40,6 @@ public class Email {
         return new Email(from, subject, message, to, attachments);
     }
 
-
-//    public MimeMessage buildMessage(Session session) throws MessagingException {
-//        MimeMessage message = initMessage(session);
-//
-//        MimeMultipart multiPart = new MimeMultipart();
-//        multiPart.addBodyPart(asContentPart(this.getMessage()));
-//
-//        for (String attachment : attachments) {
-//            LOGGER.info("Add attachment " + attachment);
-//            multiPart.addBodyPart(asAttachmentPart(attachment));
-//        }
-//        message.setContent(multiPart);
-//
-//        return message;
-//    }
-//
-//    private MimeBodyPart asAttachmentPart(String attachment) throws MessagingException {
-//        MimeBodyPart attachmentPart = new MimeBodyPart();
-//
-//        FileDataSource dataSource = new FileDataSource(attachment);
-//        attachmentPart.setDataHandler(new DataHandler(dataSource));
-//        attachmentPart.setFileName(dataSource.getName());
-//        return attachmentPart;
-//    }
-//
-//    private MimeBodyPart asContentPart(String emailContent) throws MessagingException {
-//        MimeBodyPart bodyPart = new MimeBodyPart();
-//        bodyPart.setContent(emailContent, TYPE_HTML_UTF_8);
-//        return bodyPart;
-//    }
-//
-//    private MimeMessage initMessage(Session session) throws MessagingException {
-//        MimeMessage message = new MimeMessage(session);
-//
-//        message.setFrom(from.getFrom().toInternetAddress());
-//        message.setSubject(subject);
-//        message.setSentDate(new java.util.Date());
-//
-//        if (from.getReplyTo() != null) {
-//            message.setReplyTo(new javax.mail.Address[]{from.getReplyTo().toInternetAddress()});
-//        }
-//        message.setRecipients(Message.RecipientType.TO, toInternetAddresses(this.recipients.getToAddresses()));
-//        message.setRecipients(Message.RecipientType.CC, toInternetAddresses(this.recipients.getCCAddresses()));
-//        message.setRecipients(Message.RecipientType.BCC, toInternetAddresses(recipients.getBCCAddresses()));
-//
-//        return message;
-//    }
-
     public String getMessage() {
         return message;
     }

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(DAOTestRunner.class)
 public class PinyinDAOTest {
 
-    private PinyinDAO pinyinDAO = new PinyinDAO();
+    private PinyinDAO pinyinDAO = new PinyinDAO(MyBatisConnectionFactory.getSqlSessionFactory());
 
     @Test
     public void test_return_zi_when_given_子(){

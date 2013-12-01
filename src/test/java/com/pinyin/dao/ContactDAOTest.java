@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(DAOTestRunner.class)
-public class PinyinIbatisTest {
+public class ContactDAOTest {
 
     private static ContactDAO contactDAO;
 

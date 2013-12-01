@@ -24,6 +24,16 @@ public class PinyinDAO {
     }
 
     public void updatePinyin(String chineseWord, String pinyin) {
-//        properties.setProperty(chineseWord, pinyin);
+        SqlSession session = sqlSessionFactory.openSession();
+        Pinyin result = (Pinyin) session.selectOne("Pinyin.getByName", chineseWord);
+        if(result != null){
+            result.setPinyin(pinyin);
+            session.update("Pinyin.update", result);
+        }
+        else{
+            session.insert("Pinyin.insert", new Pinyin(chineseWord, pinyin));
+        }
+
+        session.commit();
     }
 }

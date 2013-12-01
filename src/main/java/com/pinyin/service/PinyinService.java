@@ -3,12 +3,17 @@ package com.pinyin.service;
 import com.pinyin.dao.PinyinDAO;
 import com.pinyin.domain.Address;
 import com.pinyin.domain.Email;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 public class PinyinService {
-    private PinyinDAO pinyinDAO = new PinyinDAO();
+    private PinyinDAO pinyinDAO ;
     private EmailService emailService;
 
     public PinyinService() {
+        this(new PinyinDAO(), new EmailService());
     }
 
     public PinyinService(PinyinDAO pinyinDAO) {
@@ -56,22 +61,22 @@ public class PinyinService {
     public void updatePinyin(String chineseWord, String pinyin) {
         this.pinyinDAO.updatePinyin(chineseWord, pinyin);
 
-        Address from = new Address();
-        from.setUserName("doNotReply");
-        from.setUserAddress("doNotReply@host.com");
-        Address to = new Address();
-        to.setUserName("admin");
-        to.setUserAddress("admin@host.com");
-
-        Email email = new Email();
-        email.setFrom(from);
-        email.setTo(to);
-        email.setSubject("subject");
-        email.setMessage("message");
+//        Address from = new Address();
+//        from.setUserName("doNotReply");
+//        from.setUserAddress("doNotReply@host.com");
+//        Address to = new Address();
+//        to.setUserName("admin");
+//        to.setUserAddress("admin@host.com");
 //
-//        Address from = Address.anAddress("doNotReply", "doNotReply@host.com");
-//        Address to = Address.anAddress("admin", "admin@host.com");
-//        Email email2 = Email.anEmail(from, "subject", "message", to);
+//        Email email = new Email();
+//        email.setFrom(from);
+//        email.setTo(to);
+//        email.setSubject("subject");
+//        email.setMessage("message");
+//
+        Address from = Address.anAddress("doNotReply", "doNotReply@host.com");
+        Address to = Address.anAddress("admin", "admin@host.com");
+        Email email = Email.anEmail(from, "subject", "message", to);
 
         this.emailService.sendEmail(email);
     }

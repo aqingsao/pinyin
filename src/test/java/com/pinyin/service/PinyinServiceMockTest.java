@@ -1,8 +1,12 @@
 package com.pinyin.service;
 
 import com.pinyin.dao.PinyinDAO;
+import com.pinyin.domain.Address;
+import com.pinyin.domain.Email;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -33,6 +37,16 @@ public class PinyinServiceMockTest {
         pinyinService.updatePinyin("朝", "chao");
 
         verify(pinyinDAO, times(1)).updatePinyin("朝", "chao");
-        verify(emailService, times(1)).sendEmail(null);
+
+        ArgumentCaptor<Email> argumentCaptor = spy(ArgumentCaptor.forClass(Email.class));
+        verify(emailService).sendEmail(argumentCaptor.capture());
+
+        Email actual = argumentCaptor.getValue();
+        assertThat(actual.getFrom().getUserName(), is("doNotReply"));
+        assertThat(actual.getFrom().getUserAddress(), is("doNotReply@host.com"));
+        assertThat(actual.getTo().getUserName(), is("admin"));
+        assertThat(actual.getTo().getUserAddress(), is("admin@host.com"));
+        assertThat(actual.getMessage(), is("message"));
+        assertThat(actual.getSubject(), is("subject"));
     }
 }

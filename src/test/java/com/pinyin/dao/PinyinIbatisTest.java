@@ -1,20 +1,23 @@
 package com.pinyin.dao;
 
+import com.pinyin.commons.DAOTestRunner;
 import com.pinyin.domain.Contact;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
+@RunWith(DAOTestRunner.class)
 public class PinyinIbatisTest {
 
     private static ContactDAO contactDAO;
 
     @BeforeClass
-    public static  void runBeforeClass() {
+    public static void runBeforeClass() {
         contactDAO = new ContactDAO();
     }
 

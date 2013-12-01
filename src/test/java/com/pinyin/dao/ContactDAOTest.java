@@ -35,7 +35,6 @@ public class ContactDAOTest {
 
     @Test
     public void testSelectById() {
-
         Contact actual = new Contact(2, "Contact1", "(000) 000-0000", "contact1@loianetest.com");
 
         Contact expected = contactDAO.selectById(2);

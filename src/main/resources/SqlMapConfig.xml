@@ -15,8 +15,8 @@
             <dataSource type="POOLED">
                 <property name="driver" value="org.h2.Driver"/>
                 <property name="url" value="jdbc:h2:~/pinyin"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="username" value="pinyin"/>
+                <property name="password" value="password"/>
             </dataSource>
         </environment>
     </environments>

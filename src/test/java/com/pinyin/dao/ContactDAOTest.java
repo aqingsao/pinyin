@@ -2,81 +2,80 @@ package com.pinyin.dao;
 
 import com.pinyin.commons.DAOTestRunner;
 import com.pinyin.domain.Contact;
-import org.junit.AfterClass;
+import org.hamcrest.core.Is;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
+import static org.junit.internal.matchers.IsCollectionContaining.hasItem;
 
 @RunWith(DAOTestRunner.class)
 public class ContactDAOTest {
 
     private static ContactDAO contactDAO;
+    private static Contact zhangSan;
+    private static Contact liSi;
 
     @BeforeClass
     public static void runBeforeClass() {
         contactDAO = new ContactDAO();
-    }
-
-    @AfterClass
-    public static void runAfterClass() {
-        contactDAO = null;
+        zhangSan = persistedContact("ZhangSan", "(010) 6688 5544", "zhangsan@host.com");
+        liSi = persistedContact("LiSi", "(010) 6688 5533", "lisi@host.com");
     }
 
     @Test
     public void testSelectAll() {
         List<Contact> list = contactDAO.selectAll();
-        assertNotNull(list);
-        assertEquals(20, list.size());
+        assertThat(list, not(nullValue()));
+        assertThat(list, hasItem(zhangSan));
+        assertThat(list, hasItem(liSi));
     }
 
     @Test
     public void testSelectById() {
-        Contact actual = new Contact(2, "Contact1", "(000) 000-0000", "contact1@loianetest.com");
+        Contact actual = contactDAO.selectById(zhangSan.getId());
 
-        Contact expected = contactDAO.selectById(2);
-
-        assertNotNull(expected);
-        assertEquals(actual, expected);
-        assertNotSame(actual, expected);
+        assertNotNull(actual);
+        assertEquals(zhangSan, actual);
     }
 
     @Test
     public void testUpdate() {
+        liSi.setName("lisi2");
+        liSi.setEmail("lisi2@host.com");
+        liSi.setPhone("(010) 2222 2222");
+        contactDAO.update(liSi);
 
-        Contact actual = new Contact(3, "Contact2Updated", "(000) 111-1111", "contact1updated@loianetest.com");
+        Contact actual = contactDAO.selectById(liSi.getId());
 
-        Contact expected = contactDAO.selectById(3);
-        expected.setEmail("contact1updated@loianetest.com");
-        expected.setName("Contact2Updated");
-        expected.setPhone("(000) 111-1111");
-        contactDAO.update(expected);
-        expected = contactDAO.selectById(3);
-
-        assertNotNull(expected);
-        assertEquals(actual, expected);
-        assertNotSame(actual, expected);
+        assertNotNull(actual);
+        assertThat(actual.getName(), is(liSi.getName()));
+        assertThat(actual.getPhone(), is(liSi.getPhone()));
+        assertThat(actual.getEmail(), is(liSi.getEmail()));
     }
 
     @Test
     public void testInsert() {
 
-        Contact actual = new Contact();
-        actual.setName("Loiane");
-        actual.setPhone("(000) 111-1111");
-        actual.setEmail("loianeg@gmail.com");
-        contactDAO.insert(actual);
+        Contact expected = new Contact();
+        expected.setName("Loiane");
+        expected.setPhone("(000) 111-1111");
+        expected.setEmail("loianeg@gmail.com");
+        contactDAO.insert(expected);
+        assertThat(expected.getId(), not(nullValue()));
 
-        assertEquals(21, actual.getId());
+        Contact actual = contactDAO.selectById(expected.getId()); //id = 21
 
-        Contact expected = contactDAO.selectById(actual.getId()); //id = 21
-
-        assertEquals(actual, expected);
-        assertNotSame(actual, expected);
-
+        assertEquals(expected, actual);
+        assertThat(actual.getName(), is(expected.getName()));
+        assertThat(actual.getPhone(), is(expected.getPhone()));
+        assertThat(actual.getEmail(), is(expected.getEmail()));
     }
 
     @Test
@@ -87,6 +86,12 @@ public class ContactDAOTest {
         Contact expected = contactDAO.selectById(21);
 
         assertNull(expected);
+    }
+
+    private static Contact persistedContact(String name, String phone, String email) {
+        Contact contact = new Contact(name, phone, email);
+        contactDAO.insert(contact);
+        return contact;
     }
 
 }

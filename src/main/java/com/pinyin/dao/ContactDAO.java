@@ -14,14 +14,12 @@ public class ContactDAO {
         sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();
     }
 
-    @SuppressWarnings("unchecked")
     public List<Contact> selectAll(){
 
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
-            List<Contact> list = session.selectList("Contact.getAll");
-            return list;
+            return session.selectList("Contact.getAll");
         } finally {
             session.close();
         }
@@ -32,8 +30,7 @@ public class ContactDAO {
         SqlSession session = sqlSessionFactory.openSession();
 
         try {
-            Contact contact = (Contact) session.selectOne("Contact.getById",id);
-            return contact;
+            return (Contact) session.selectOne("Contact.getById",id);
         } finally {
             session.close();
         }

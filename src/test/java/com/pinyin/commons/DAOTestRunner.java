@@ -46,7 +46,6 @@ public class DAOTestRunner extends BlockJUnit4ClassRunner {
     }
 
     protected void afterAllTestsRun() {
-        cleanDatabase();
     }
 
     protected void beforeAllTestsRun() {
@@ -87,9 +86,11 @@ public class DAOTestRunner extends BlockJUnit4ClassRunner {
         Flyway flyway = new Flyway();
         flyway.setValidateOnMigrate(true);
         flyway.configure(flywayConfiguration());
+        flyway.setLocations("db/migration");
         flyway.clean();
         flyway.init();
         flyway.migrate();
+        LOGGER.info("flyway finished to migrate successfully.");
     }
 
     protected void cleanDatabase() {

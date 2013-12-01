@@ -13,7 +13,6 @@ public class MyBatisConnectionFactory {
     private static SqlSessionFactory sqlSessionFactory;
 
     static {
-
         try {
 
             String resource = "SqlMapConfig.xml";
@@ -23,17 +22,12 @@ public class MyBatisConnectionFactory {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
             }
         }
-
-        catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
-        }
-        catch (IOException iOException) {
-            iOException.printStackTrace();
+        catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     public static SqlSessionFactory getSqlSessionFactory() {
-
         return sqlSessionFactory;
     }
 

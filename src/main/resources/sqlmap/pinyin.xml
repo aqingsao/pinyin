@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Pinyin">
+
+    <resultMap id="result" type="Pinyin">
+        <result property="id" column="PINYIN_ID"/>
+        <result property="name" column="PINYIN_NAME"/>
+        <result property="pinyin" column="PINYIN_PINYIN"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="result">
+    	SELECT * FROM PINYIN
+    </select>
+
+    <select id="getByName" parameterType="string" resultMap="result">
+    	SELECT PINYIN_PINYIN FROM PINYIN WHERE PINYIN_NAME = #{id}
+  	</select>
+
+    <insert id="insert" parameterType="Pinyin">
+        INSERT INTO PINYIN (PINYIN_NAME, PINYIN_PINYIN)
+        VALUES (#{name}, #{pinyin});
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id() as id
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="Pinyin">
+	  	UPDATE PINYIN
+		SET
+			PINYIN_NAME = #{name},
+			PINYIN_PINYIN = #{pinyin}
+		WHERE PINYIN_ID = #{id};
+  </update>
+
+</mapper>

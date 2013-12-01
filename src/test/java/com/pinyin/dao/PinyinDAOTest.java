@@ -1,11 +1,14 @@
 package com.pinyin.dao;
 
+import com.pinyin.commons.DAOTestRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+@RunWith(DAOTestRunner.class)
 public class PinyinDAOTest {
 
     private PinyinDAO pinyinDAO = new PinyinDAO();

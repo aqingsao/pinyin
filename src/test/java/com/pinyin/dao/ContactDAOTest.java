@@ -1,6 +1,7 @@
 package com.pinyin.dao;
 
 import com.pinyin.commons.DAOTestRunner;
+import com.pinyin.commons.MyBatisConnectionFactory;
 import com.pinyin.domain.Contact;
 import org.junit.BeforeClass;
 import org.junit.Test;

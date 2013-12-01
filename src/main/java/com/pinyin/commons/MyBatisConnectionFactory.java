@@ -1,4 +1,4 @@
-package com.pinyin.dao;
+package com.pinyin.commons;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;

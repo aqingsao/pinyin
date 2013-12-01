@@ -1,6 +1,6 @@
 package com.pinyin.service;
 
-import com.pinyin.dao.MyBatisConnectionFactory;
+import com.pinyin.commons.MyBatisConnectionFactory;
 import com.pinyin.dao.PinyinDAO;
 import org.junit.Before;
 import org.junit.Test;

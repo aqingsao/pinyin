@@ -11,12 +11,11 @@ import java.io.Reader;
 public class MyBatisConnectionFactory {
 
     private static SqlSessionFactory sqlSessionFactory;
+    public static final String SQL_MAP_CONFIG_XML = "SqlMapConfig.xml";
 
     static {
         try {
-
-            String resource = "SqlMapConfig.xml";
-            Reader reader = Resources.getResourceAsReader(resource);
+            Reader reader = Resources.getResourceAsReader(SQL_MAP_CONFIG_XML);
 
             if (sqlSessionFactory == null) {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);

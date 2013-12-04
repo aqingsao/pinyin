@@ -82,9 +82,9 @@ public class ContactDAOTest {
     @Test
     public void testDelete() {
 
-        contactDAO.delete(21);
+        contactDAO.delete(liSi.getId());
 
-        Contact expected = contactDAO.selectById(21);
+        Contact expected = contactDAO.selectById(liSi.getId());
 
         assertNull(expected);
     }
